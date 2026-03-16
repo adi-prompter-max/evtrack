@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VoltBrücke — European EV Components for India</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --md-bg: #FFFBFE;
+    --md-on-bg: #1C1B1F;
+    --md-primary: #6750A4;
+    --md-on-primary: #FFFFFF;
+    --md-primary-container: #EADDFF;
+    --md-on-primary-container: #21005D;
+    --md-secondary: #625B71;
+    --md-secondary-container: #E8DEF8;
+    --md-on-secondary-container: #1D192B;
+    --md-tertiary: #7D5260;
+    --md-tertiary-container: #FFD8E4;
+    --md-surface: #FFFBFE;
+    --md-surface-container: #F3EDF7;
+    --md-surface-container-low: #E7E0EC;
+    --md-surface-variant: #E7E0EC;
+    --md-on-surface-variant: #49454F;
+    --md-outline: #79747E;
+    --md-outline-variant: #CAC4D0;
+    --md-ease: cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: var(--md-bg);
+    color: var(--md-on-bg);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    font-weight: 400;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.8rem 5vw;
+    background: rgba(255,251,254,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--md-outline-variant);
+    transition: box-shadow 0.3s var(--md-ease);
+  }
+  .nav-logo {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--md-on-bg);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+  .nav-logo span { color: var(--md-primary); }
+  .nav-links { display: flex; gap: 0.5rem; list-style: none; align-items: center; }
+  .nav-links a {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--md-on-surface-variant);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    transition: all 0.3s var(--md-ease);
+    letter-spacing: 0.01em;
+  }
+  .nav-links a:hover {
+    background: rgba(103, 80, 164, 0.08);
+    color: var(--md-primary);
+  }
+  .nav-cta {
+    background: var(--md-primary) !important;
+    color: var(--md-on-primary) !important;
+    padding: 0.5rem 1.5rem !important;
+    border-radius: 9999px;
+    font-weight: 500;
+    transition: all 0.3s var(--md-ease) !important;
+  }
+  .nav-cta:hover {
+    background: rgba(103, 80, 164, 0.9) !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08);
+    transform: translateY(-1px);
+  }
+  .nav-cta:active { transform: scale(0.95) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 4vw 4rem 8vw;
+    position: relative;
+    z-index: 1;
+  }
+  /* Organic blur shapes behind hero */
+  .hero::before {
+    content: '';
+    position: absolute;
+    width: 500px; height: 500px;
+    border-radius: 100px 100px 100px 20px;
+    background: rgba(103, 80, 164, 0.12);
+    filter: blur(80px);
+    top: -80px; left: -120px;
+    z-index: 0;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: rgba(125, 82, 96, 0.1);
+    filter: blur(80px);
+    bottom: -100px; left: 30%;
+    z-index: 0;
+  }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    color: var(--md-primary);
+    margin-bottom: 1.5rem;
+    background: var(--md-secondary-container);
+    padding: 0.4rem 1.2rem;
+    border-radius: 9999px;
+    width: fit-content;
+  }
+  h1 {
+    font-size: clamp(2.5rem, 4.5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+    color: var(--md-on-bg);
+  }
+  h1 em {
+    font-style: normal;
+    color: var(--md-primary);
+  }
+  .hero-sub {
+    font-size: 1.125rem;
+    color: var(--md-on-surface-variant);
+    max-width: 500px;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+  }
+  .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--md-primary);
+    color: var(--md-on-primary);
+    padding: 0.85rem 2rem;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s var(--md-ease);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08);
+  }
+  .btn-primary:hover {
+    background: rgba(103, 80, 164, 0.9);
+    box-shadow: 0 4px 8px rgba(103,80,164,0.3), 0 2px 4px rgba(0,0,0,0.08);
+    transform: translateY(-1px);
+  }
+  .btn-primary:active { transform: scale(0.95); box-shadow: 0 1px 2px rgba(0,0,0,0.12); }
+  .btn-secondary {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--md-primary);
+    text-decoration: none;
+    padding: 0.85rem 1.5rem;
+    border-radius: 9999px;
+    border: 1px solid var(--md-outline);
+    transition: all 0.3s var(--md-ease);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .btn-secondary:hover {
+    background: rgba(103, 80, 164, 0.08);
+    border-color: var(--md-primary);
+  }
+  .btn-secondary:active { transform: scale(0.95); }
+
+  .hero-right {
+    background: var(--md-surface-container);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 2rem;
+    position: relative;
+    overflow: hidden;
+    border-radius: 48px 0 0 48px;
+  }
+  /* Organic blur shapes in hero right */
+  .hero-right::before {
+    content: '';
+    position: absolute;
+    width: 350px; height: 350px;
+    border-radius: 50%;
+    background: rgba(103, 80, 164, 0.15);
+    filter: blur(80px);
+    top: -60px; right: -80px;
+    z-index: 0;
+  }
+  .hero-right::after {
+    content: '';
+    position: absolute;
+    width: 250px; height: 250px;
+    border-radius: 100px 20px 100px 100px;
+    background: rgba(125, 82, 96, 0.12);
+    filter: blur(60px);
+    bottom: -40px; left: -40px;
+    z-index: 0;
+  }
+
+  .bridge-visual {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 2.5rem;
+    position: relative;
+    z-index: 1;
+  }
+  .country-pill {
+    background: var(--md-bg);
+    padding: 1.2rem 1.8rem;
+    text-align: center;
+    border-radius: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+    transition: all 0.3s var(--md-ease);
+  }
+  .country-pill:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
+    transform: translateY(-2px) scale(1.02);
+  }
+  .country-pill:active { transform: scale(0.95); }
+  .country-flag { font-size: 2.5rem; display: block; margin-bottom: 0.4rem; }
+  .country-name {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--md-on-surface-variant);
+  }
+  .bridge-arrow {
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  .arrow-line {
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--md-outline-variant), var(--md-primary));
+    position: relative;
+    border-radius: 1px;
+  }
+  .arrow-line::after {
+    content: '>';
+    position: absolute;
+    right: -6px;
+    top: -9px;
+    color: var(--md-primary);
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
+  .arrow-label {
+    font-size: 0.6875rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--md-primary);
+    font-weight: 500;
+  }
+  .component-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    max-width: 360px;
+    position: relative;
+    z-index: 1;
+  }
+  .chip {
+    background: var(--md-bg);
+    padding: 0.4rem 1rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--md-on-surface-variant);
+    border-radius: 9999px;
+    border: 1px solid var(--md-outline-variant);
+    transition: all 0.3s var(--md-ease);
+  }
+  .chip:hover {
+    background: rgba(103, 80, 164, 0.08);
+    border-color: var(--md-primary);
+    color: var(--md-primary);
+    transform: scale(1.05);
+  }
+  .chip:active { transform: scale(0.95); }
+  .chip.gold {
+    background: var(--md-secondary-container);
+    border-color: transparent;
+    color: var(--md-on-secondary-container);
+  }
+  .chip.gold:hover {
+    background: rgba(103, 80, 164, 0.15);
+    color: var(--md-primary);
+  }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    background: var(--md-primary);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-radius: 0;
+  }
+  .stat-item {
+    padding: 2rem 1.5rem;
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.12);
+    transition: all 0.3s var(--md-ease);
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-item:hover { background: rgba(255,255,255,0.08); }
+  .stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--md-on-primary);
+    display: block;
+    line-height: 1.2;
+    margin-bottom: 0.3rem;
+  }
+  .stat-label {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.01em;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 5rem 8vw; }
+  .section-tag {
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    color: var(--md-primary);
+    margin-bottom: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 1rem;
+    background: var(--md-secondary-container);
+    border-radius: 9999px;
+  }
+  h2 {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin-bottom: 1rem;
+    color: var(--md-on-bg);
+  }
+  .section-intro {
+    font-size: 1.0625rem;
+    color: var(--md-on-surface-variant);
+    max-width: 580px;
+    line-height: 1.6;
+    margin-bottom: 3rem;
+  }
+
+  /* ── COMPONENTS SECTION ── */
+  #components { position: relative; overflow: hidden; }
+  /* Decorative blur shape */
+  #components::before {
+    content: '';
+    position: absolute;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: rgba(232, 222, 248, 0.5);
+    filter: blur(100px);
+    top: -150px; right: -150px;
+    z-index: 0;
+  }
+  .components-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+    position: relative;
+    z-index: 1;
+  }
+  .component-card {
+    background: var(--md-surface-container);
+    padding: 1.75rem;
+    border-radius: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    position: relative;
+    transition: all 0.3s var(--md-ease);
+    overflow: hidden;
+  }
+  .component-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    background: rgba(103, 80, 164, 0);
+    transition: background 0.3s var(--md-ease);
+    z-index: 0;
+  }
+  .component-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
+    transform: scale(1.02);
+  }
+  .component-card:hover::before {
+    background: rgba(103, 80, 164, 0.04);
+  }
+  .component-card:active { transform: scale(0.98); }
+  .component-card > * { position: relative; z-index: 1; }
+  .card-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: var(--md-primary-container);
+    border-radius: 16px;
+  }
+  .card-margin {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    background: var(--md-secondary-container);
+    color: var(--md-on-secondary-container);
+    padding: 0.2rem 0.75rem;
+    margin-bottom: 0.8rem;
+    border-radius: 9999px;
+  }
+  .card-margin.high { background: #D5F5D0; color: #1B5E20; }
+  .card-margin.medium { background: #D0E8FF; color: #0D47A1; }
+  .component-card h3 {
+    font-size: 1.125rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    line-height: 1.35;
+    color: var(--md-on-bg);
+  }
+  .component-card p {
+    font-size: 0.875rem;
+    color: var(--md-on-surface-variant);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  .suppliers-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .supplier-tag {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--md-primary);
+    background: var(--md-primary-container);
+    padding: 0.2rem 0.6rem;
+    border-radius: 9999px;
+    transition: all 0.2s var(--md-ease);
+  }
+  .supplier-tag:hover {
+    background: var(--md-primary);
+    color: var(--md-on-primary);
+  }
+
+  /* ── HOW IT WORKS ── */
+  .how-section {
+    background: var(--md-surface-container);
+    position: relative;
+    overflow: hidden;
+  }
+  .how-section::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 100px 20px 100px 100px;
+    background: rgba(103, 80, 164, 0.08);
+    filter: blur(80px);
+    top: -200px; right: -200px;
+    mix-blend-mode: multiply;
+  }
+  .how-section::after {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: rgba(125, 82, 96, 0.06);
+    filter: blur(80px);
+    bottom: -150px; left: -100px;
+    mix-blend-mode: multiply;
+  }
+  .how-section .section-tag {
+    background: var(--md-primary);
+    color: var(--md-on-primary);
+  }
+  .how-section h2 { color: var(--md-on-bg); }
+  .how-section .section-intro { color: var(--md-on-surface-variant); }
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+    position: relative;
+    z-index: 1;
+  }
+  .step {
+    background: var(--md-bg);
+    border-radius: 24px;
+    padding: 2rem 1.5rem;
+    position: relative;
+    transition: all 0.3s var(--md-ease);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    overflow: hidden;
+  }
+  .step:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transform: scale(1.02);
+  }
+  .step:active { transform: scale(0.98); }
+  .step-num {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--md-primary);
+    line-height: 1;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: var(--md-primary-container);
+    border-radius: 16px;
+    position: relative;
+  }
+  /* Hidden glow on hover */
+  .step-num::after {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: 24px;
+    background: rgba(103, 80, 164, 0.2);
+    filter: blur(12px);
+    opacity: 0;
+    transition: opacity 0.3s var(--md-ease);
+    z-index: -1;
+  }
+  .step:hover .step-num::after { opacity: 1; }
+  .step h3 {
+    font-size: 1.0625rem;
+    font-weight: 500;
+    color: var(--md-on-bg);
+    margin-bottom: 0.5rem;
+  }
+  .step p {
+    font-size: 0.875rem;
+    color: var(--md-on-surface-variant);
+    line-height: 1.6;
+  }
+
+  /* ── WHY GERMANY ── */
+  #why { position: relative; overflow: hidden; }
+  #why::before {
+    content: '';
+    position: absolute;
+    width: 450px; height: 450px;
+    border-radius: 50%;
+    background: rgba(232, 222, 248, 0.4);
+    filter: blur(100px);
+    bottom: -100px; left: -100px;
+    z-index: 0;
+  }
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+    position: relative;
+    z-index: 1;
+  }
+  .advantage-list { list-style: none; }
+  .advantage-list li {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--md-outline-variant);
+    font-size: 0.9375rem;
+    transition: all 0.3s var(--md-ease);
+    cursor: default;
+  }
+  .advantage-list li:hover {
+    padding-left: 0.5rem;
+    background: rgba(103, 80, 164, 0.04);
+    border-radius: 16px;
+  }
+  .advantage-list li:last-child { border-bottom: none; }
+  .adv-icon {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    padding-top: 0.15rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--md-primary-container);
+    border-radius: 12px;
+  }
+  .adv-text strong {
+    display: block;
+    font-weight: 500;
+    font-size: 1rem;
+    margin-bottom: 0.15rem;
+    color: var(--md-on-bg);
+  }
+  .adv-text span { color: var(--md-on-surface-variant); font-size: 0.875rem; }
+  .why-visual {
+    background: var(--md-surface-container);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    border-radius: 32px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.06);
+    transition: all 0.3s var(--md-ease);
+  }
+  .why-visual:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12), 0 2px 6px rgba(0,0,0,0.06);
+  }
+  .why-visual::before {
+    content: '🇩🇪';
+    font-size: 7rem;
+    position: absolute;
+    right: -0.5rem;
+    bottom: -0.5rem;
+    opacity: 0.08;
+  }
+  .comparison-heading {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--md-primary);
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--md-outline-variant);
+    letter-spacing: 0.01em;
+  }
+  .comparison-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--md-outline-variant);
+    transition: all 0.2s var(--md-ease);
+  }
+  .comparison-row:hover {
+    background: rgba(103, 80, 164, 0.04);
+    border-radius: 12px;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  .comparison-row:last-child { border-bottom: none; }
+  .comp-label {
+    font-size: 0.8125rem;
+    color: var(--md-on-surface-variant);
+    font-weight: 400;
+  }
+  .comp-values { display: flex; gap: 1rem; align-items: center; }
+  .comp-val {
+    text-align: center;
+    min-width: 65px;
+  }
+  .comp-val .val {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    display: block;
+  }
+  .comp-val .country {
+    font-size: 0.6875rem;
+    color: var(--md-on-surface-variant);
+    opacity: 0.6;
+  }
+  .comp-val.win .val { color: var(--md-primary); }
+  .comp-val.lose .val { color: var(--md-on-surface-variant); opacity: 0.35; text-decoration: line-through; }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    background: var(--md-primary);
+    color: var(--md-on-primary);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 48px 48px 0 0;
+  }
+  /* Organic blur shapes */
+  .contact-section::before {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    filter: blur(80px);
+    top: -100px; right: -100px;
+    z-index: 0;
+  }
+  .contact-section::after {
+    content: '';
+    position: absolute;
+    width: 300px; height: 300px;
+    border-radius: 100px 20px 100px 100px;
+    background: rgba(125, 82, 96, 0.15);
+    filter: blur(60px);
+    bottom: -80px; left: -60px;
+    z-index: 0;
+  }
+  .contact-section > * { position: relative; z-index: 1; }
+  .contact-section h2 { color: var(--md-on-primary); }
+  .contact-section .section-intro { color: rgba(255,255,255,0.8); }
+  .contact-section .section-tag {
+    background: rgba(255,255,255,0.15);
+    color: var(--md-on-primary);
+    border: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(8px);
+  }
+  .contact-info {
+    font-size: 0.9375rem;
+    color: rgba(255,255,255,0.65);
+    margin-top: 1.5rem;
+    line-height: 1.9;
+  }
+  .contact-form { display: flex; flex-direction: column; gap: 0.75rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  input, select, textarea {
+    background: var(--md-surface-container-low);
+    border: none;
+    border-bottom: 2px solid var(--md-outline);
+    color: var(--md-on-bg);
+    padding: 1rem;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.9375rem;
+    border-radius: 12px 12px 0 0;
+    outline: none;
+    transition: border-color 0.2s var(--md-ease), background 0.2s var(--md-ease);
+    width: 100%;
+    height: 56px;
+  }
+  input::placeholder, textarea::placeholder { color: rgba(28,27,31,0.45); }
+  input:focus, select:focus, textarea:focus {
+    border-bottom-color: var(--md-primary);
+    background: rgba(103, 80, 164, 0.05);
+    box-shadow: 0 0 0 0 transparent;
+  }
+  select { cursor: pointer; }
+  select option { background: var(--md-bg); color: var(--md-on-bg); }
+  textarea { height: 120px; resize: vertical; border-radius: 12px 12px 0 0; }
+  .btn-white {
+    background: var(--md-bg);
+    color: var(--md-primary);
+    padding: 0.9rem 2.5rem;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: all 0.3s var(--md-ease);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  }
+  .btn-white:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transform: translateY(-1px);
+    background: rgba(255,251,254,0.92);
+  }
+  .btn-white:active { transform: scale(0.95); box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--md-on-bg);
+    color: rgba(255,255,255,0.5);
+    padding: 2rem 8vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8125rem;
+    font-weight: 400;
+  }
+  .footer-logo {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--md-bg);
+    text-decoration: none;
+  }
+  .footer-logo span { color: var(--md-primary-container); }
+  .footer-links { display: flex; gap: 1rem; }
+  .footer-links a {
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.8125rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 9999px;
+    transition: all 0.3s var(--md-ease);
+  }
+  .footer-links a:hover {
+    color: var(--md-bg);
+    background: rgba(255,255,255,0.1);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-left > * {
+    animation: fadeUp 0.6s var(--md-ease) forwards;
+    opacity: 0;
+  }
+  .hero-left > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-left > *:nth-child(2) { animation-delay: 0.2s; }
+  .hero-left > *:nth-child(3) { animation-delay: 0.35s; }
+  .hero-left > *:nth-child(4) { animation-delay: 0.5s; }
+
+  /* ── REDUCED MOTION ── */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 3rem 1.5rem; }
+    .hero-right {
+      min-height: 320px;
+      padding: 3rem 1.5rem;
+      border-radius: 0;
+    }
+    .hero::before, .hero::after { display: none; }
+    .stats-bar { grid-template-columns: 1fr 1fr; }
+    .components-grid { grid-template-columns: 1fr; }
+    .steps-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .why-grid, .contact-section { grid-template-columns: 1fr; gap: 2rem; }
+    nav .nav-links { display: none; }
+    .form-row { grid-template-columns: 1fr; }
+    section { padding: 3rem 1.5rem; }
+    .contact-section { border-radius: 32px 32px 0 0; }
+    h1 { font-size: clamp(2rem, 6vw, 2.5rem); }
+  }
+
+  @media (max-width: 500px) {
+    .stats-bar { grid-template-columns: 1fr; }
+    .stat-item { border-right: none !important; border-bottom: 1px solid rgba(255,255,255,0.12); }
+    .stat-item:last-child { border-bottom: none; }
+    .steps-grid { grid-template-columns: 1fr; }
+    .contact-section { border-radius: 24px 24px 0 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Volt<span>Brücke</span></a>
+  <ul class="nav-links">
+    <li><a href="#components">Components</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#why">Why Germany</a></li>
+    <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Germany → India EV Supply Chain</div>
+    <h1>Certified European<br>EV Components<br><em>delivered to India</em></h1>
+    <p class="hero-sub">We source high-margin, safety-certified EV infrastructure components from Germany's best manufacturers — OCPP controllers, CCS2 connectors, BMS ICs, smart meters — and supply Indian EV companies that can't get them from China.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Request Components</a>
+      <a href="#components" class="btn-secondary">See what we source →</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="bridge-visual">
+      <div class="country-pill">
+        <span class="country-flag">🇩🇪</span>
+        <span class="country-name">Germany</span>
+      </div>
+      <div class="bridge-arrow">
+        <div class="arrow-line"></div>
+        <div class="arrow-label">Certified</div>
+        <div class="arrow-line"></div>
+        <div class="arrow-label">Components</div>
+      </div>
+      <div class="country-pill">
+        <span class="country-flag">🇮🇳</span>
+        <span class="country-name">India</span>
+      </div>
+    </div>
+    <div class="component-chips">
+      <div class="chip gold">OCPP 2.0 Controllers</div>
+      <div class="chip">CCS2 Connectors</div>
+      <div class="chip">BMS ICs — Infineon</div>
+      <div class="chip gold">OCMF Smart Meters</div>
+      <div class="chip">DC Contactors — Schaltbau</div>
+      <div class="chip">Mennekes Type 2</div>
+      <div class="chip gold">Thermal Management</div>
+      <div class="chip">Phoenix Contact OCPP</div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <span class="stat-number">1.32M</span>
+    <span class="stat-label">Charging stations India needs by 2030</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number">35–50%</span>
+    <span class="stat-label">Gross margins on certified EU components</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number">€0</span>
+    <span class="stat-label">Capital required — pure sourcing model</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number">5–8%</span>
+    <span class="stat-label">Commission earned on every order</span>
+  </div>
+</div>
+
+<!-- COMPONENTS -->
+<section id="components">
+  <div class="section-tag">What We Source</div>
+  <h2>Six categories where Germany<br>beats China on every deal</h2>
+  <p class="section-intro">China wins on commodity volume. Germany wins on certification, safety, and protocol compliance. We focus exclusively on components where Indian buyers cannot use uncertified Chinese alternatives.</p>
+
+  <div class="components-grid">
+    <div class="component-card">
+      <span class="card-icon">⚡</span>
+      <span class="card-margin high">Margin 35–50%</span>
+      <h3>OCPP-Certified Charging Controllers</h3>
+      <p>OCPP 1.6 / 2.0.1 communication modules for EV charging stations. Required for fleet contracts and highway concessions. Chinese alternatives have documented interoperability failures.</p>
+      <div class="suppliers-list">
+        <span class="supplier-tag">Phoenix Contact</span>
+        <span class="supplier-tag">Weidmüller</span>
+        <span class="supplier-tag">Siemens</span>
+      </div>
+    </div>
+    <div class="component-card">
+      <span class="card-icon">🔌</span>
+      <span class="card-margin high">Margin 30–45%</span>
+      <h3>CCS2 & Type 2 Connectors</h3>
+      <p>Mennekes invented the Type 2 standard (IEC 62196). India mandates CCS2 for fast charging. Safety-critical, high-cycle component. Chinese connectors fail fire safety audits regularly.</p>
+      <div class="suppliers-list">
+        <span class="supplier-tag">Mennekes</span>
+        <span class="supplier-tag">Harting</span>
+        <span class="supplier-tag">Phoenix Contact</span>
+      </div>
+    </div>
+    <div class="component-card">
+      <span class="card-icon">🧠</span>
+      <span class="card-margin high">Margin 25–40%</span>
+      <h3>Battery Management System ICs</h3>
+      <p>AEC-Q100 automotive-grade BMS chips for Indian battery pack manufacturers (Exide, Amara Raja, Grinntech). Infineon TLE series dominates. Evaluation boards sell for €200–500 to R&D teams.</p>
+      <div class="suppliers-list">
+        <span class="supplier-tag">Infineon</span>
+        <span class="supplier-tag">Bosch</span>
+        <span class="supplier-tag">STMicroelectronics</span>
+      </div>
+    </div>
+    <div class="component-card">
+      <span class="card-icon">🔋</span>
+      <span class="card-margin medium">Margin 25–35%</span>
+      <h3>DC Contactors & Relays</h3>
+      <p>High-voltage DC breaking contactors for fast chargers. DC arc suppression is a known field failure point for Chinese contactors in India's installed base. Repeat maintenance orders.</p>
+      <div class="suppliers-list">
+        <span class="supplier-tag">Schaltbau</span>
+        <span class="supplier-tag">TE Connectivity</span>
+        <span class="supplier-tag">Eaton</span>
+      </div>
+    </div>
+    <div class="component-card">
+      <span class="card-icon">📊</span>
+      <span class="card-margin medium">Margin 25–35%</span>
+      <h3>OCMF Smart Energy Meters</h3>
+      <p>MID-certified, tamper-proof billing meters required for public charging stations. Indian regulators are tightening OCMF compliance. Fleet operators need one per charger.</p>
+      <div class="suppliers-list">
+        <span class="supplier-tag">Mennekes</span>
+        <span class="supplier-tag">Carlo Gavazzi</span>
+        <span class="supplier-tag">Iskraemeco</span>
+      </div>
+    </div>
+    <div class="component-card">
+      <span class="card-icon">🌡️</span>
+      <span class="card-margin medium">Margin 20–30%</span>
+      <h3>Thermal Management Materials</h3>
+      <p>Thermal interface materials and phase change compounds for battery packs operating in India's 40°C+ summers. German TIMs dramatically outperform Chinese alternatives in thermal cycling durability.</p>
+      <div class="suppliers-list">
+        <span class="supplier-tag">Henkel</span>
+        <span class="supplier-tag">Laird Technologies</span>
+        <span class="supplier-tag">Parker Hannifin</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="how-section">
+  <div class="section-tag">Process</div>
+  <h2>Simple. Transparent. No inventory risk.</h2>
+  <p class="section-intro">We operate as a pure sourcing agent — you pay only when components are delivered. No minimum orders, no advance payments until supplier quotes are confirmed.</p>
+  <div class="steps-grid">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h3>Tell Us What You Need</h3>
+      <p>Share your component specs, certifications required, and annual volume estimates. We'll respond within 48 hours with supplier options.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h3>We Source & Qualify</h3>
+      <p>We identify the right German/EU manufacturer, negotiate pricing for your volumes, and verify CE/IEC certification documentation on your behalf.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h3>Export & Shipping</h3>
+      <p>We handle all EU export documentation, HS code classification, freight forwarding, and coordinate with your customs broker in India.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <h3>You Receive, We Invoice</h3>
+      <p>Components land at your warehouse. We invoice our 5–8% sourcing fee. No hidden charges. Transparent pricing on every order.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY GERMANY -->
+<section id="why">
+  <div class="why-grid">
+    <div>
+      <div class="section-tag">Why Certified Matters</div>
+      <h2>German certification saves you contracts — not just costs</h2>
+      <p class="section-intro">The cheapest component is the one that doesn't void your fleet contract, fail your fire audit, or break your OCPP interoperability test.</p>
+      <ul class="advantage-list">
+        <li>
+          <span class="adv-icon">✅</span>
+          <div class="adv-text">
+            <strong>CE / IEC Certified</strong>
+            <span>Insurance companies and fleet operators demand certified parts. One field failure can void an entire ₹5Cr contract.</span>
+          </div>
+        </li>
+        <li>
+          <span class="adv-icon">🔗</span>
+          <div class="adv-text">
+            <strong>OCPP Interoperability Guaranteed</strong>
+            <span>Indian highway tenders now specify OCPP 2.0.1. Chinese modules have documented protocol failures at scale.</span>
+          </div>
+        </li>
+        <li>
+          <span class="adv-icon">🏛️</span>
+          <div class="adv-text">
+            <strong>Government Compliance Ready</strong>
+            <span>India-Germany GSDP partnership (Dec 2025) is actively aligning battery safety and charging standards between the two countries.</span>
+          </div>
+        </li>
+        <li>
+          <span class="adv-icon">♻️</span>
+          <div class="adv-text">
+            <strong>Longer Lifecycle = Lower TCO</strong>
+            <span>German components rated for 10,000+ cycles cost 20% more upfront but deliver 40–60% lower total cost over 5 years.</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="why-visual">
+      <p class="comparison-heading">Germany vs China — Component Comparison</p>
+      <div class="comparison-row">
+        <span class="comp-label">CE / IEC Certification</span>
+        <div class="comp-values">
+          <div class="comp-val win"><span class="val">✓ Full</span><span class="country">🇩🇪 Germany</span></div>
+          <div class="comp-val lose"><span class="val">✗ Rare</span><span class="country">🇨🇳 China</span></div>
+        </div>
+      </div>
+      <div class="comparison-row">
+        <span class="comp-label">OCPP 2.0.1 Compliance</span>
+        <div class="comp-values">
+          <div class="comp-val win"><span class="val">✓ Tested</span><span class="country">🇩🇪 Germany</span></div>
+          <div class="comp-val lose"><span class="val">✗ Issues</span><span class="country">🇨🇳 China</span></div>
+        </div>
+      </div>
+      <div class="comparison-row">
+        <span class="comp-label">Cycle Life (DC Contactors)</span>
+        <div class="comp-values">
+          <div class="comp-val win"><span class="val">10,000+</span><span class="country">🇩🇪 Germany</span></div>
+          <div class="comp-val lose"><span class="val">3–5,000</span><span class="country">🇨🇳 China</span></div>
+        </div>
+      </div>
+      <div class="comparison-row">
+        <span class="comp-label">MID Billing Certification</span>
+        <div class="comp-values">
+          <div class="comp-val win"><span class="val">✓ Standard</span><span class="country">🇩🇪 Germany</span></div>
+          <div class="comp-val lose"><span class="val">✗ Missing</span><span class="country">🇨🇳 China</span></div>
+        </div>
+      </div>
+      <div class="comparison-row">
+        <span class="comp-label">Thermal Rating (India Climate)</span>
+        <div class="comp-values">
+          <div class="comp-val win"><span class="val">-40 to +125°C</span><span class="country">🇩🇪 Germany</span></div>
+          <div class="comp-val lose"><span class="val">0 to +85°C</span><span class="country">🇨🇳 China</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div>
+    <div class="section-tag">Work With Us</div>
+    <h2>Looking for certified<br>EU components?</h2>
+    <p class="section-intro">Tell us what you need. We'll respond within 48 hours with qualified supplier options, pricing indication, and certification documentation.</p>
+    <p class="contact-info">📍 Based in Hamburg, Germany<br>🇮🇳 Serving EV companies across India<br>✉️ hello@voltbrucke.com</p>
+  </div>
+  <div>
+    <form class="contact-form" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <input type="text" placeholder="Your Name" required>
+        <input type="text" placeholder="Company Name" required>
+      </div>
+      <input type="email" placeholder="Work Email" required>
+      <select required>
+        <option value="" disabled selected>Component Category Needed</option>
+        <option>OCPP Controllers / Communication Modules</option>
+        <option>CCS2 / Type 2 Connectors & Inlets</option>
+        <option>BMS ICs & Evaluation Boards</option>
+        <option>DC Contactors & High-Voltage Relays</option>
+        <option>OCMF Smart Energy Meters</option>
+        <option>Thermal Management Materials</option>
+        <option>Multiple / Not Sure Yet</option>
+      </select>
+      <textarea placeholder="Tell us about your project — vehicle type, annual volumes, certifications required, timeline..."></textarea>
+      <button type="submit" class="btn-white">Send Enquiry →</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a class="footer-logo" href="#">Volt<span>Brücke</span></a>
+  <span>© 2026 VoltBrücke. Hamburg, Germany.</span>
+  <div class="footer-links">
+    <a href="#components">Components</a>
+    <a href="#how">Process</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('button');
+  btn.textContent = '✓ Enquiry Sent!';
+  btn.style.background = 'var(--md-primary)';
+  btn.style.color = 'var(--md-on-primary)';
+  btn.style.transform = 'scale(0.95)';
+  setTimeout(() => {
+    btn.textContent = 'Send Enquiry →';
+    btn.style.background = '';
+    btn.style.color = '';
+    btn.style.transform = '';
+    e.target.reset();
+  }, 3000);
+}
+
+// Scroll fade-in
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.component-card, .step, .stat-item').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.5s cubic-bezier(0.2, 0, 0, 1), transform 0.5s cubic-bezier(0.2, 0, 0, 1)';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
